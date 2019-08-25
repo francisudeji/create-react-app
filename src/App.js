@@ -1,10 +1,26 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ApolloProvider } from '@apollo/react-hooks'
+
+import Home from './components/home'
+import Countries from './components/countries'
+import Country from './components/country'
+
+const client = new ApolloProvider({
+  uri: 'https://countries.trevorblades.com/'
+})
 
 function App() {
   return (
-    <div className='App'>
-      <h1>Hello World</h1>
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/countries' component={Countries} />
+          <Route exact path='/countries/:code' component={Country} />
+        </Switch>
+      </Router>
+    </ApolloProvider>
   )
 }
 
