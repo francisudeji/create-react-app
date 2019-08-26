@@ -3,9 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 100%;
   max-width: 960px;
-  padding: 1rem;
+  padding: 0 1rem;
   margin: 0 auto;
-  overflow: hidden;
 `
 export const H1 = styled.h1`
   color: #f0f0f0;
@@ -69,7 +68,7 @@ export const LI = styled(Card)`
   align-items: center;
 `
 
-export const Indicator = styled.p`
+export const Indicator = styled.div`
   display: block;
   margin: 50vh auto 0 auto;
   text-align: center;
