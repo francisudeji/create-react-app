@@ -30,6 +30,7 @@ function Countries({
   `)
 
   if (loading) return <Indicator>Fetching Country Information...</Indicator>
+
   if (error)
     return (
       <Indicator color='#f00'>Error Fetching Country Information</Indicator>
@@ -37,23 +38,30 @@ function Countries({
 
   return (
     <Container>
-      <H1>Country</H1>
-      <Card>
-        <div>
-          <P>
-            Country: <span>{country.name}</span>
-          </P>
-          <P>
-            Area Code: <span>+{country.phone}</span>
-          </P>
-          <P>
-            Currency: <span>{country.currency}</span>
-          </P>
-        </div>
-      </Card>
-      <ButtonGroup>
-        <Link to='/countries'>← Back to Countries</Link>
-      </ButtonGroup>
+      {country !== null ? (
+        <>
+          <H1>Country</H1>
+
+          <Card>
+            <div>
+              <P>
+                Country: <span>{country.name}</span>
+              </P>
+              <P>
+                Area Code: <span>+{country.phone}</span>
+              </P>
+              <P>
+                Currency: <span>{country.currency}</span>
+              </P>
+            </div>
+          </Card>
+          <ButtonGroup>
+            <Link to='/countries'>← Back to Countries</Link>
+          </ButtonGroup>
+        </>
+      ) : (
+        <Indicator color='#f00'>Error Fetching Country Information</Indicator>
+      )}
     </Container>
   )
 }
