@@ -14,15 +14,12 @@ export const H1 = styled.h1`
   font-size: 3rem;
   font-weight: 400;
 `
-
 export const H2 = styled(H1)`
   margin-top: 2rem;
 `
-
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
 
   & a {
     align-items: center;
@@ -38,5 +35,44 @@ export const ButtonGroup = styled.div`
     }
   }
 `
+export const P = styled.p`
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  display: block;
+  color: #f0f0f0;
 
-export const Button = styled.a``
+  & span {
+    font-weight: 300;
+  }
+`
+
+export const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #333333;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem auto;
+`
+export const UL = styled.ul`
+  color: #f0f0f0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`
+export const LI = styled(Card)`
+  flex-direction: row;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const Indicator = styled.p`
+  display: block;
+  margin: 50vh auto 0 auto;
+  text-align: center;
+  font-size: 1.5rem;
+  color: ${props => props.color || '#f0f0f0'};
+`
