@@ -1,7 +1,8 @@
 import React from 'react'
-import { Container, H1 } from '../styles'
+import { Container, H1, P, UL, LI, ButtonGroup, Indicator } from '../styles'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import { Link } from 'react-router-dom'
 
 function Countries() {
   const { loading, error, data } = useQuery(gql`
@@ -21,45 +22,56 @@ function Countries() {
     }
   `)
 
-  if (loading) return <p style={{ textAlign: 'center' }}>Loading...</p>
-  if (error) return <p style={{ textAlign: 'center' }}>Error...</p>
-
-  // console.log(data.countries)
+  if (loading) return <Indicator>Fetching Countries...</Indicator>
+  if (error)
+    return (
+      <Indicator color='#f00'>Error Fetching Country Information</Indicator>
+    )
 
   return (
     <Container>
       <H1>Countries</H1>
-      <ul
-        style={{ color: '#f0f0f0', listStyle: 'none', padding: 0, margin: 0 }}
-      >
-        {data.countries.map(({ name, languages, continent, code }, i) => (
-          <li
-            key={i}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginBottom: '1rem',
-              background: '#333333',
-              padding: '1rem',
-              borderRadius: '4px'
-            }}
-          >
-            <div>Country: {name}</div>
+      <ButtonGroup>
+        <Link to='/'>← Back to Home</Link>
+      </ButtonGroup>
+      <UL>
+        {data.countries.map(({ name, languages, code, continent }, i) => (
+          <LI key={i}>
             <div>
-              Languages:{' '}
-              {languages.map((lang, idx) => (
-                <span key={lang.name + idx}>
-                  <span>{lang.name}</span>
-                  {', '}
-                  <span>{lang.native}</span>
-                </span>
-              ))}
+              <div>
+                <P>
+                  Country: <span>{name}</span>
+                </P>
+              </div>
+              <div>
+                <P>
+                  Languages Spoken: <span>{`(${languages.length})`}</span>
+                </P>
+                <div style={{ paddingLeft: '1rem' }}>
+                  {languages.map((lang, idx) => (
+                    <div key={lang.name + idx}>
+                      <P>
+                        English: <span>{lang.name}</span>
+                      </P>
+                      <P>
+                        Native: <span>{lang.native}</span>
+                      </P>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <P>
+                  Continent: <span>{continent.name}</span>
+                </P>
+              </div>
             </div>
-            <div>Continent: {continent.name}</div>
-            <div>Code: {code}</div>
-          </li>
+            <ButtonGroup>
+              <Link to={`/countries/${code}`}>View </Link>
+            </ButtonGroup>
+          </LI>
         ))}
-      </ul>
+      </UL>
     </Container>
   )
 }
